@@ -26,7 +26,7 @@
     "    docs is a list of lists, each inner list is a document represented as a list of words\n",
     "    minlen is the minimum length of the word to keep\n",
     "    \"\"\"\n",
-    "    return [ [t for t in d if len(t) >= minlen and t not in ['the','and','or','is','some','.']] for d in docs ]\n",
+    "    return [ [t for t in d if len(t) >= minlen ] for d in docs ]\n",
     "\n",
     "\n",
     "\n",
@@ -39,7 +39,6 @@
     "\n",
     "    \n",
     "    test_documents =  [l.split()[1:] for l in test_lines]\n",
-    "    test_documents= filterLen(docs,2)\n",
     "    return test_documents\n",
     "\n",
     "\n",
@@ -116,8 +115,7 @@
     "from sklearn.feature_extraction.text import CountVectorizer\n",
     "count_vect = CountVectorizer()\n",
     "X_train_counts = count_vect.fit_transform(train_documents[0])\n",
-    "X_train_counts.shape\n",
-    "\n"
+    "X_train_counts.shape\n"
    ]
   },
   {
@@ -138,6 +136,21 @@
     "\n",
     "\n",
     "\n",
+    "\n",
+    "\n",
+    "def cmer(name, c=3):\n",
+    "    r\"\"\" Given a name and parameter c, return the vector of c-mers associated with the name\n",
+    "    \"\"\"\n",
+    "    name = name.lower()\n",
+    "    \n",
+    "    ### FILL IN THE BLANKS ###\n",
+    "    \n",
+    "    v = []\n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "    return v\n",
     "\n",
     "\n",
     "\n",
@@ -631,14 +644,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 204,
+   "execution_count": 196,
    "metadata": {},
    "outputs": [
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "  (1, 0)\t1.0\n"
+     "ename": "LookupError",
+     "evalue": "\n**********************************************************************\n  Resource u'corpora/stopwords' not found.  Please use the NLTK\n  Downloader to obtain the resource:  >>> nltk.download()\n  Searched in:\n    - '/Users/rashmisharma/nltk_data'\n    - '/usr/share/nltk_data'\n    - '/usr/local/share/nltk_data'\n    - '/usr/lib/nltk_data'\n    - '/usr/local/lib/nltk_data'\n**********************************************************************",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mLookupError\u001b[0m                               Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-196-aaa07745fba4>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     27\u001b[0m \u001b[0;34m\"\"\" Transform texts to Tf-Idf coordinates and cluster texts using K-Means \"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     28\u001b[0m vectorizer = TfidfVectorizer(tokenizer=process_text,\n\u001b[0;32m---> 29\u001b[0;31m                                  \u001b[0mstop_words\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mstopwords\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwords\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'english'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     30\u001b[0m                                  \u001b[0mmax_df\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m0.95\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     31\u001b[0m                                  \u001b[0mmin_df\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m0.0\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/Users/rashmisharma/anaconda2/lib/python2.7/site-packages/nltk/corpus/util.pyc\u001b[0m in \u001b[0;36m__getattr__\u001b[0;34m(self, attr)\u001b[0m\n\u001b[1;32m    114\u001b[0m             \u001b[0;32mraise\u001b[0m \u001b[0mAttributeError\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"LazyCorpusLoader object has no attribute '__bases__'\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    115\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 116\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__load\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    117\u001b[0m         \u001b[0;31m# This looks circular, but its not, since __load() changes our\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    118\u001b[0m         \u001b[0;31m# __class__ to something new:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/Users/rashmisharma/anaconda2/lib/python2.7/site-packages/nltk/corpus/util.pyc\u001b[0m in \u001b[0;36m__load\u001b[0;34m(self)\u001b[0m\n\u001b[1;32m     79\u001b[0m             \u001b[0;32mexcept\u001b[0m \u001b[0mLookupError\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     80\u001b[0m                 \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mroot\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mnltk\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdata\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfind\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'{}/{}'\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mformat\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msubdir\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mzip_name\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 81\u001b[0;31m                 \u001b[0;32mexcept\u001b[0m \u001b[0mLookupError\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0;32mraise\u001b[0m \u001b[0me\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     82\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     83\u001b[0m         \u001b[0;31m# Load the corpus.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mLookupError\u001b[0m: \n**********************************************************************\n  Resource u'corpora/stopwords' not found.  Please use the NLTK\n  Downloader to obtain the resource:  >>> nltk.download()\n  Searched in:\n    - '/Users/rashmisharma/nltk_data'\n    - '/usr/share/nltk_data'\n    - '/usr/local/share/nltk_data'\n    - '/usr/lib/nltk_data'\n    - '/usr/local/lib/nltk_data'\n**********************************************************************"
      ]
     }
    ],
@@ -671,17 +690,16 @@
     "    return tokens\n",
     "\n",
     "\n",
+    "\"\"\" Transform texts to Tf-Idf coordinates and cluster texts using K-Means \"\"\"\n",
     "vectorizer = TfidfVectorizer(tokenizer=process_text,\n",
     "                                 stop_words=stopwords.words('english'),\n",
     "                                 max_df=0.95,\n",
     "                                 min_df=0.0,\n",
     "                                 lowercase=True)\n",
     "\n",
-    "texts=[]\n",
-    "texts.append(\"I am here\")\n",
-    "texts.append(\"good\")\n",
+    "text=\"This movie was horrible. I swear they didn't even write a script they just kinda winged it through out the whole movie. Ice-T was annoying as hell. *SPOILERS Phht more like reasons not to watch it* They sit down and eat breakfast for 20 minutes. he coulda been long gone. The ground was hard it would of been close to impossible to to track him with out dogs. And when ICE-T is on that Hill and uses that Spaz-15 Assault SHOTGUN\"\n",
     "\n",
-    "tfidf_model = vectorizer.fit_transform(texts)\n",
+    "tfidf_model = vectorizer.fit_transform(text)\n",
     "\n",
     "print tfidf_model"
    ]
